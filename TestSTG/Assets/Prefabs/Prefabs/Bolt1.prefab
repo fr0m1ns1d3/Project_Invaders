@@ -169,4 +169,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 0}
   playerExplosion: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 3}
-  customScore: 5
+  customScore: 0
