@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
+        //if (Input.GetButtonDown("PauseButton"))
         {
             if (GameIsPaused)
             {
@@ -24,7 +25,6 @@ public class PauseMenu : MonoBehaviour
             }
         } 
     }
-
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
@@ -47,5 +47,10 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit() ;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("Main");
     }
 }
