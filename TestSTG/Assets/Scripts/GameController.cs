@@ -16,13 +16,6 @@ public class GameController : MonoBehaviour
     public Text scoreText, gameOverText;
     private bool gameOver = false;
     private int score = 0;
-
-    public AudioMixer audioMixer;
-
-    public void SetVolume (float volume)
-    {
-        audioMixer.SetFloat("volume", volume);
-    }
     
     void Start()
     {
