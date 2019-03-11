@@ -2041,6 +2041,7 @@ MonoBehaviour:
   waitWave: 2
   scoreText: {fileID: 1906914551}
   gameOverText: {fileID: 452171825}
+  audioMixer: {fileID: 24100000, guid: 6a6a4f69dd491c340acfbe7f55bb8d46, type: 2}
 --- !u!4 &1291588420
 Transform:
   m_ObjectHideFlags: 0

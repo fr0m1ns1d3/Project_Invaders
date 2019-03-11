@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
@@ -15,6 +16,13 @@ public class GameController : MonoBehaviour
     public Text scoreText, gameOverText;
     private bool gameOver = false;
     private int score = 0;
+
+    public AudioMixer audioMixer;
+
+    public void SetVolume (float volume)
+    {
+        audioMixer.SetFloat("volume", volume);
+    }
     
     void Start()
     {
