@@ -16,6 +16,13 @@ public class PlayerController : MonoBehaviour
     public GameObject shot;
     public float fireRate, nextFire;
 
+    private Quaternion calibrationQuaternion;
+
+    private void Start()
+    {
+        CalibrateAccellerometer();
+    }
+
     private void Update()
     {
         if (Input.GetKey("space") && Time.time > nextFire)
@@ -28,10 +35,13 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        //float moveHorizontal = Input.GetAxis("Horizontal");
+        //float moveVertical = Input.GetAxis("Vertical");
+        //Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
 
-        Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
+        Vector3 accelerationRaw = Input.acceleration;
+        Vector3 acceleration = FixAccelleration(accelerationRaw);
+        Vector3 movement = new Vector3(acceleration.x, 0, acceleration.y);
 
         GetComponent<Rigidbody>().velocity = movement*speed;
 
@@ -42,5 +52,18 @@ public class PlayerController : MonoBehaviour
             );
 
         GetComponent<Rigidbody>().rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody>().velocity.x * -tilt);
+    }
+
+    private void CalibrateAccellerometer()
+    {
+        Vector3 accelerationSnapshot = Input.acceleration;
+        Quaternion rotateQuaternion = Quaternion.FromToRotation(new Vector3(0, 0, -1), accelerationSnapshot);
+        calibrationQuaternion = Quaternion.Inverse(rotateQuaternion);
+    }
+
+    private Vector3 FixAccelleration(Vector3 acceleration)
+    {
+        Vector3 fixedAcceleration = calibrationQuaternion * acceleration;
+        return fixedAcceleration;
     }
 }
