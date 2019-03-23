@@ -17,17 +17,13 @@ public class PlayerController : MonoBehaviour
     public float fireRate, nextFire;
 
     public SimpleTouchPad touchPad;
+    public SimpleFireTouch fireTouch;
 
     private Quaternion calibrationQuaternion;
 
-    private void Start()
-    {
-        CalibrateAccellerometer();
-    }
-
     private void Update()
     {
-        if (Input.GetKey("space") && Time.time > nextFire)
+        if (fireTouch.CanFire() && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
@@ -58,16 +54,4 @@ public class PlayerController : MonoBehaviour
         GetComponent<Rigidbody>().rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody>().velocity.x * -tilt);
     }
 
-    private void CalibrateAccellerometer()
-    {
-        Vector3 accelerationSnapshot = Input.acceleration;
-        Quaternion rotateQuaternion = Quaternion.FromToRotation(new Vector3(0, 0, -1), accelerationSnapshot);
-        calibrationQuaternion = Quaternion.Inverse(rotateQuaternion);
-    }
-
-    private Vector3 FixAccelleration(Vector3 acceleration)
-    {
-        Vector3 fixedAcceleration = calibrationQuaternion * acceleration;
-        return fixedAcceleration;
-    }
 }
