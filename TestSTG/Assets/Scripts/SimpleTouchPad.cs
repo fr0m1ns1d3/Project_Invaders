@@ -8,17 +8,20 @@ public class SimpleTouchPad : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 {
     private Vector2 origins;
     private Vector2 direction;
+    private Vector2 smoothDirection;
+
+    public float smoothing;
 
     public void OnDrag(PointerEventData eventData)
-    {
-        origins = eventData.position;
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
     {
         Vector2 currentPosition = eventData.position;
         Vector2 directionRaw = currentPosition - origins;
         direction = directionRaw.normalized;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        origins = eventData.position;
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -33,6 +36,7 @@ public class SimpleTouchPad : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 
     public Vector2 GetDirection()
     {
-        return direction;
+        smoothDirection = Vector2.MoveTowards(smoothDirection, direction, smoothing);
+        return smoothDirection;
     }
 }

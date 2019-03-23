@@ -875,6 +875,7 @@ MonoBehaviour:
   shot: {fileID: 7718725283036244678, guid: 94d41fdd46075b84d91948b640d5a791, type: 3}
   fireRate: 0.25
   nextFire: 0
+  touchPad: {fileID: 1814639784}
 --- !u!82 &366693943
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2702,6 +2703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee50c36e115c6c94a94cacd51d025ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothing: 0.5
 --- !u!114 &1814639785
 MonoBehaviour:
   m_ObjectHideFlags: 0

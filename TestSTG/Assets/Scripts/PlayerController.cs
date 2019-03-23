@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public GameObject shot;
     public float fireRate, nextFire;
 
+    public SimpleTouchPad touchPad;
+
     private Quaternion calibrationQuaternion;
 
     private void Start()
@@ -39,10 +41,12 @@ public class PlayerController : MonoBehaviour
         //float moveVertical = Input.GetAxis("Vertical");
         //Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
 
-        Vector3 accelerationRaw = Input.acceleration;
-        Vector3 acceleration = FixAccelleration(accelerationRaw);
-        Vector3 movement = new Vector3(acceleration.x, 0, acceleration.y);
+        //Vector3 accelerationRaw = Input.acceleration;
+        //Vector3 acceleration = FixAccelleration(accelerationRaw);
+        //Vector3 movement = new Vector3(acceleration.x, 0, acceleration.y);
 
+        Vector2 direction = touchPad.GetDirection();
+        Vector3 movement = new Vector3(direction.x, 0, direction.y);
         GetComponent<Rigidbody>().velocity = movement*speed;
 
         GetComponent<Rigidbody>().position = new Vector3(
