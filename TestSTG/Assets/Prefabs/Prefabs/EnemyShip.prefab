@@ -135,8 +135,8 @@ MonoBehaviour:
   smoothing: 7
   tilt: 10
   boundary:
-    xMin: -6
-    xMax: 6
+    xMin: -5
+    xMax: 5
     zMin: -20
     zMax: 20
 --- !u!82 &5411487766368811619
