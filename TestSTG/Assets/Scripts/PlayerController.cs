@@ -14,15 +14,22 @@ public class PlayerController : MonoBehaviour
     public Boundary boundary;
     public Transform shotSpawn;
     public GameObject shot;
-    public float fireRate, nextFire = 0;
+    public float fireRate, startWait;
+
+    private float nextFire = 0, waitTime;
 
     public SimpleTouchPad touchPad;
 
     private Quaternion calibrationQuaternion;
 
+    private void Start()
+    {
+        waitTime = Time.time + startWait;
+    }
+
     private void Update()
     {
-            if (Time.time > nextFire)
+            if (Time.time > nextFire && waitTime < Time.time)
             {
                 nextFire = Time.time + fireRate;
                 Instantiate(shot, shotSpawn.position, shotSpawn.rotation);

@@ -873,8 +873,8 @@ MonoBehaviour:
     zMax: 15
   shotSpawn: {fileID: 31854495}
   shot: {fileID: 7718725283036244678, guid: 94d41fdd46075b84d91948b640d5a791, type: 3}
-  fireRate: 0.25
-  nextFire: 0
+  fireRate: 0.3
+  startWait: 4
   touchPad: {fileID: 1814639784}
 --- !u!82 &366693943
 AudioSource:
@@ -2033,16 +2033,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hazards:
   - {fileID: 8017544853234829098, guid: 21bbbe22b7b97a043807bb039c603d6d, type: 3}
+  - {fileID: 3842554618356430544, guid: 3ce5d54d92f525f459acc0726bac7c48, type: 3}
+  - {fileID: 3842554618356430544, guid: 54ffb875e01f456448c99138fac7edf6, type: 3}
   - {fileID: 5136182354329226805, guid: 34b1214a92d2ced4e9e4c227891c31a1, type: 3}
-  - {fileID: 2025803292340482261, guid: 3adae05d944aa06438140436c1e61ecd, type: 3}
   - {fileID: 5411487766368811621, guid: 9a865b1f59eec044bb72d37bb3995585, type: 3}
   spawnValues: {x: 5, y: 0, z: 17}
-  countHazard: 10
-  spawnWait: 0.5
-  startWait: 1
+  countHazard: 3
+  spawnWait: 1
+  startWait: 3
   waitWave: 2
   scoreText: {fileID: 1906914551}
   gameOverText: {fileID: 452171825}
+  pauseMenu: {fileID: 74062160}
 --- !u!4 &1291588420
 Transform:
   m_ObjectHideFlags: 0

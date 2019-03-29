@@ -15,7 +15,9 @@ public class GameController : MonoBehaviour
 
     public Text scoreText, gameOverText;
     private bool gameOver = false;
-    private int score = 0;
+    private int score = 0, hazardID, shipCounter;
+    [SerializeField]
+    private GameObject pauseMenu;
     
     void Start()
     {
@@ -23,6 +25,7 @@ public class GameController : MonoBehaviour
         UpdateScore();
         StartCoroutine(SpawnWaves());
         gameOverText.text = "";
+        shipCounter = 0;
     }
 
     IEnumerator SpawnWaves ()
@@ -30,27 +33,33 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(startWait);
         while (!gameOver)
         {
+            shipCounter = 0;
+
             for (int i = 0; i < countHazard; i++)
             {
-                GameObject hazard = hazards[Random.Range(0, hazards.Length)];
+                hazardID = Random.Range(0, hazards.Length);
+
+                if (hazardID == 3 && shipCounter>=2)
+                {
+                    hazardID = Random.Range(0, hazards.Length-1);
+                }
+                else
+                {
+                    shipCounter++;
+                }
+
+                GameObject hazard = hazards[hazardID];
                 Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
                 Quaternion spawnRotation = Quaternion.identity;
-                Instantiate(hazard, spawnPosition, spawnRotation);
+                Instantiate(hazard, spawnPosition, spawnRotation);              
                 yield return new WaitForSeconds(spawnWait);
             }
+            countHazard++;
             yield return new WaitForSeconds(waitWave);
         }
-    }
 
-    private void Update()
-    {
-        if (gameOver)
-        {
-            if (Input.GetKey("return"))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-        }
+        pauseMenu.SetActive(true);
+        gameOver = false;
     }
 
     public void AddScore(int fixedScore)

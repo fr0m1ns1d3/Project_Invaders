@@ -4,11 +4,12 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine;
 
-public class SimpleTouchPad : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
+public class SimpleTouchPad : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler, IEndDragHandler
 {
     private Vector2 origins;
     private Vector2 direction;
     private Vector2 smoothDirection;
+    private Vector2 currentPosition;
     private bool touched;
     private int pointerID;
 
@@ -18,10 +19,15 @@ public class SimpleTouchPad : MonoBehaviour, IPointerDownHandler, IDragHandler, 
     {
         if (eventData.pointerId == pointerID)
         {
-            Vector2 currentPosition = eventData.position;
+            currentPosition = eventData.position;
             Vector2 directionRaw = currentPosition - origins;
             direction = directionRaw.normalized;
         }
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        origins = currentPosition;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -51,7 +57,7 @@ public class SimpleTouchPad : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 
     public Vector2 GetDirection()
     {
-        //smoothDirection = Vector2.MoveTowards(smoothDirection, direction, smoothing);
         return direction;
     }
+
 }
