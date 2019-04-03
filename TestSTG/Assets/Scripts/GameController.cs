@@ -39,11 +39,12 @@ public class GameController : MonoBehaviour
             {
                 hazardID = Random.Range(0, hazards.Length);
 
-                if (hazardID == 3 && shipCounter>=2)
+                if (hazardID == 5 && shipCounter>=2)
                 {
                     hazardID = Random.Range(0, hazards.Length-1);
                 }
-                else
+
+                if (hazardID == 5)
                 {
                     shipCounter++;
                 }

@@ -12,5 +12,11 @@ public class RandomRotator : MonoBehaviour
         rb.angularVelocity = Random.insideUnitSphere * tumble;
     }
 
-   
+    private void Update()
+    {
+        if (transform.parent != null)
+        {
+            transform.position = transform.parent.position;
+        }
+    }
 }

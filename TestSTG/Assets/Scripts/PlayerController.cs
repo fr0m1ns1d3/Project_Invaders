@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
 
     private float nextFire = 0, waitTime;
 
+    [SerializeField]
+    private GameObject playerShield;
+
     public SimpleTouchPad touchPad;
 
     private Quaternion calibrationQuaternion;
@@ -52,4 +55,15 @@ public class PlayerController : MonoBehaviour
         GetComponent<Rigidbody>().rotation = Quaternion.Euler(0, 0, GetComponent<Rigidbody>().velocity.x * -tilt);
     }
 
+    public void ShieldOn ()
+    {
+        playerShield.SetActive(true);
+        StartCoroutine(ShieldOff());
+    } 
+
+    IEnumerator ShieldOff()
+    {
+        yield return new WaitForSeconds(10);
+        playerShield.SetActive(false);
+    }
 }
