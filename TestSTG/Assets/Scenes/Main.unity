@@ -2182,13 +2182,15 @@ MonoBehaviour:
   - {fileID: 3842554618356430544, guid: 3ce5d54d92f525f459acc0726bac7c48, type: 3}
   - {fileID: 3842554618356430544, guid: 54ffb875e01f456448c99138fac7edf6, type: 3}
   - {fileID: 5136182354329226805, guid: 34b1214a92d2ced4e9e4c227891c31a1, type: 3}
-  - {fileID: 555146132, guid: a87b3acd6032bf54ea795416266faaa4, type: 3}
+  - {fileID: 8017544853234829098, guid: 21bbbe22b7b97a043807bb039c603d6d, type: 3}
   - {fileID: 5411487766368811621, guid: 9a865b1f59eec044bb72d37bb3995585, type: 3}
+  boosts:
+  - {fileID: 555146132, guid: a87b3acd6032bf54ea795416266faaa4, type: 3}
   spawnValues: {x: 5, y: 0, z: 17}
   countHazard: 3
   spawnWait: 1
   startWait: 3
-  waitWave: 2
+  waitWave: 5
   scoreText: {fileID: 1906914551}
   gameOverText: {fileID: 452171825}
   pauseMenu: {fileID: 74062160}
