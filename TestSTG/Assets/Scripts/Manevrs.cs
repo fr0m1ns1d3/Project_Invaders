@@ -15,8 +15,8 @@ public class Manevrs : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        StartCoroutine(Evade());
         currentSpeed = -5;
+        StartCoroutine(Evade());
     }
 
     IEnumerator Evade()

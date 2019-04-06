@@ -139,6 +139,7 @@ MonoBehaviour:
     xMax: 5
     zMin: -20
     zMax: 20
+  currentSpeed: -5
 --- !u!82 &5411487766368811619
 AudioSource:
   m_ObjectHideFlags: 0

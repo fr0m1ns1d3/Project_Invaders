@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
 
     public Text scoreText, gameOverText;
     private bool gameOver = false;
-    private int score = 0, hazardID, shipCounter, boostID;
+    private int score = 0, hazardID, shipCounter, boostID, maxShips;
     [SerializeField]
     private GameObject pauseMenu;
 
@@ -26,6 +26,19 @@ public class GameController : MonoBehaviour
     
     void Start()
     {
+        switch (GameValues.Difficulty)
+        {
+            case GameValues.Difficulties.Easy:
+                maxShips = 2;
+                countHazard = 3;
+                spawnWait = 1;
+                break;
+            case GameValues.Difficulties.Hard:
+                maxShips = 3;
+                countHazard = 6;
+                spawnWait = 0.5f;
+                break;
+        }
         Time.timeScale = 1f;
         UpdateScore();
         StartCoroutine(SpawnWaves());
@@ -56,7 +69,7 @@ public class GameController : MonoBehaviour
 
                 hazardID = Random.Range(0, hazards.Length);
 
-                if (hazardID == 5 && shipCounter>=2)
+                if (hazardID == 5 && shipCounter>= maxShips)
                 {
                     hazardID = Random.Range(0, hazards.Length-1);
                 }
@@ -69,7 +82,23 @@ public class GameController : MonoBehaviour
                 GameObject hazard = hazards[hazardID];
                 Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
                 Quaternion spawnRotation = Quaternion.identity;
-                Instantiate(hazard, spawnPosition, spawnRotation);              
+                PlayerBolt spd = hazard.GetComponent<PlayerBolt>();
+                switch (GameValues.Difficulty)
+                {
+                    case GameValues.Difficulties.Easy:
+                        if (spd != null)
+                        {
+                            spd.speed = -5;
+                        }
+                        break;
+                    case GameValues.Difficulties.Hard:
+                        if (spd != null)
+                        {
+                            spd.speed = -10;
+                        }                       
+                        break;
+                }
+                Instantiate(hazard, spawnPosition, spawnRotation); 
                 yield return new WaitForSeconds(spawnWait);
             }
             countHazard++;

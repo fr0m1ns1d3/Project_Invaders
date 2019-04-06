@@ -16,15 +16,10 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public Toggle MultiplayerToggle;
     public GameObject DifficultyToggles;
     private void Start()
     {
-        MultiplayerToggle.onValueChanged
-            .AddListener(isMultiplayerOn => DifficultyToggles.SetActive(!isMultiplayerOn));
-            MultiplayerToggle.isOn = GameValues.IsMultiplayer;
         DifficultyToggles.transform.GetChild((int)GameValues.Difficulty).GetComponent<Toggle>().isOn = true;
-
     }
 
     #region Difficulty
@@ -34,10 +29,10 @@ public class MainMenu : MonoBehaviour
             GameValues.Difficulty = GameValues.Difficulties.Easy;
 
     }
-        public void SetHardDifficulty(bool isOn)
-        {
-            if (isOn)
-                GameValues.Difficulty = GameValues.Difficulties.Hard;
-        }
+    public void SetHardDifficulty(bool isOn)
+    {
+       if (isOn)
+            GameValues.Difficulty = GameValues.Difficulties.Hard;
+    }
     #endregion
 }
