@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
  
 public class MainMenu : MonoBehaviour
 {
@@ -14,4 +15,29 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public Toggle MultiplayerToggle;
+    public GameObject DifficultyToggles;
+    private void Start()
+    {
+        MultiplayerToggle.onValueChanged
+            .AddListener(isMultiplayerOn => DifficultyToggles.SetActive(!isMultiplayerOn));
+            MultiplayerToggle.isOn = GameValues.IsMultiplayer;
+        DifficultyToggles.transform.GetChild((int)GameValues.Difficulty).GetComponent<Toggle>().isOn = true;
+
+    }
+
+    #region Difficulty
+    public void SetEasyDifficulty(bool isOn)
+    {
+        if (isOn)
+            GameValues.Difficulty = GameValues.Difficulties.Easy;
+
+    }
+        public void SetHardDifficulty(bool isOn)
+        {
+            if (isOn)
+                GameValues.Difficulty = GameValues.Difficulties.Hard;
+        }
+    #endregion
 }
