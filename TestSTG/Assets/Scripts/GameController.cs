@@ -82,22 +82,47 @@ public class GameController : MonoBehaviour
                 GameObject hazard = hazards[hazardID];
                 Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
                 Quaternion spawnRotation = Quaternion.identity;
-                PlayerBolt spd = hazard.GetComponent<PlayerBolt>();
-                switch (GameValues.Difficulty)
+                if (hazard.CompareTag("Enemy"))
                 {
-                    case GameValues.Difficulties.Easy:
-                        if (spd != null)
-                        {
-                            spd.speed = -5;
-                        }
-                        break;
-                    case GameValues.Difficulties.Hard:
-                        if (spd != null)
-                        {
-                            spd.speed = -10;
-                        }                       
-                        break;
+                    PlayerBolt spd = hazard.GetComponent<PlayerBolt>();
+
+                    switch (GameValues.Difficulty)
+                    {
+                        case GameValues.Difficulties.Easy:
+                            if (spd != null)
+                            {
+                                spd.speed = -5;
+                            }
+                            break;
+                        case GameValues.Difficulties.Hard:
+                            if (spd != null)
+                            {
+                                spd.speed = -10;
+                            }
+                            break;
+                    }
+
+                } else if (hazard.CompareTag("EnemyShip"))
+                {
+                    WeaponController wc = hazard.GetComponent<WeaponController>();
+
+                    switch (GameValues.Difficulty)
+                    {
+                        case GameValues.Difficulties.Easy:
+                            if (wc != null)
+                            {                           
+                                wc.fireRate = 1.5f;
+                            }
+                            break;
+                        case GameValues.Difficulties.Hard:
+                            if (wc != null)
+                            {
+                                wc.fireRate = 0.5f;
+                            }
+                            break;
+                    }
                 }
+               
                 Instantiate(hazard, spawnPosition, spawnRotation); 
                 yield return new WaitForSeconds(spawnWait);
             }

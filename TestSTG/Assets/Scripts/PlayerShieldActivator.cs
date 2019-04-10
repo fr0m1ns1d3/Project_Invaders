@@ -6,6 +6,13 @@ public class PlayerShieldActivator : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
+
+        if (other.CompareTag("Shield"))
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
         if (other.CompareTag("Player"))
         {
             PlayerController player = other.GetComponent<PlayerController>();

@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 5411487766368811616}
   m_Layer: 0
   m_Name: EnemyShip
-  m_TagString: Enemy
+  m_TagString: EnemyShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,7 +139,7 @@ MonoBehaviour:
     xMax: 5
     zMin: -20
     zMax: 20
-  currentSpeed: -5
+  currentSpeed: -10
 --- !u!82 &5411487766368811619
 AudioSource:
   m_ObjectHideFlags: 0
