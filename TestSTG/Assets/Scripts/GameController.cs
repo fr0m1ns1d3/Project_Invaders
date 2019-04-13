@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
     
     void Start()
     {
+
         switch (GameValues.Difficulty)
         {
             case GameValues.Difficulties.Easy:
@@ -64,6 +65,8 @@ public class GameController : MonoBehaviour
                     if (Random.Range(1, 5) == boostActive)
                     {
                         callBoost();
+                        yield return new WaitForSeconds(spawnWait);
+                        continue;
                     }
                 }
 
