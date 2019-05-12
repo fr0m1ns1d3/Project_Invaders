@@ -6,6 +6,9 @@ using UnityEngine.UI;
  
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField]
+    private Text bestScore;
+
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);        
@@ -19,6 +22,7 @@ public class MainMenu : MonoBehaviour
     public GameObject DifficultyToggles;
     private void Start()
     {
+        bestScore.text = "Best Score: " + PlayerPrefs.GetInt("BestScore", 0).ToString();
         DifficultyToggles.transform.GetChild((int)GameValues.Difficulty).GetComponent<Toggle>().isOn = true;
     }
 

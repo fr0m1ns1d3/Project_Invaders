@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Boundary
@@ -10,6 +11,10 @@ public class Boundary
 
 public class PlayerController : MonoBehaviour
 {
+
+    [SerializeField]
+    private Text ShieldCountDown;
+    private int counterShield = 10;
 
     private Vector3 touchPosition;
     private Rigidbody rb;
@@ -81,13 +86,21 @@ public class PlayerController : MonoBehaviour
 
     public void ShieldOn ()
     {
+        counterShield = 5;
+        ShieldCountDown.text = counterShield.ToString();
         playerShield.SetActive(true);
         StartCoroutine(ShieldOff());
     } 
 
     IEnumerator ShieldOff()
     {
-        yield return new WaitForSeconds(10);
+        while (counterShield > 0)
+        {
+            yield return new WaitForSeconds(1);
+            counterShield--;
+            ShieldCountDown.text = counterShield.ToString();
+        }
+        ShieldCountDown.text = "";
         playerShield.SetActive(false);
     }
 }

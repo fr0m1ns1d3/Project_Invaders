@@ -163,4 +163,11 @@ public class GameController : MonoBehaviour
         gameOverText.text = "YOU DIED";
         gameOver = true;
     }
+
+    public void CheckBestScore()
+    {
+        if (score > PlayerPrefs.GetInt("BestScore", 0)) {
+            PlayerPrefs.SetInt("BestScore", score);
+        }
+    }
 }

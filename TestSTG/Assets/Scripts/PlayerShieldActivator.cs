@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerShieldActivator : MonoBehaviour
 {
+    [SerializeField]
+    private AudioClip powerSound;
+
     private void OnTriggerEnter(Collider other)
     {
 
@@ -18,6 +21,7 @@ public class PlayerShieldActivator : MonoBehaviour
             PlayerController player = other.GetComponent<PlayerController>();
             if (player != null)
             {
+                AudioSource.PlayClipAtPoint(powerSound, Camera.main.transform.position, 1f);
                 player.ShieldOn();
                 Destroy(this.gameObject);
             }
